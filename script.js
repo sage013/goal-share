@@ -9,6 +9,7 @@ function login() {
 
   if (accessCount >= 2) {
     document.getElementById("loginMessage").innerText = "This code is already used by 2 users.";
+    document.getElementById("loginMessage").style.display = "block";
     return;
   }
 
