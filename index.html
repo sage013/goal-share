@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Secret Goal Share</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Goal Sharing Vault</h1>
+
+    <div id="login-section">
+      <input type="text" id="codeInput" placeholder="Enter your secret code" />
+      <button onclick="login()">Enter</button>
+      <p id="loginMessage"></p>
+    </div>
+
+    <div id="goal-section" style="display:none;">
+      <h2>Shared Goals</h2>
+      <input type="text" id="goalInput" placeholder="Enter a goal or value" />
+      <button onclick="addGoal()">Add</button>
+      <ul id="goalList"></ul>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
