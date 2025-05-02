@@ -1,50 +1,44 @@
-let currentCode = "";
+let secretCode = "1234";  // Default secret code
+let storedGoals = [];
 
 function login() {
-  const inputCode = document.getElementById("codeInput").value.trim();
-  if (!inputCode) return;
-
-  const accessKey = `access_${inputCode}`;
-  let accessCount = parseInt(localStorage.getItem(accessKey)) || 0;
-
-  if (accessCount >= 2) {
-    document.getElementById("loginMessage").innerText = "This code is already used by 2 users.";
-    document.getElementById("loginMessage").style.display = "block";
-    return;
-  }
-
-  // Allow access
-  accessCount += 1;
-  localStorage.setItem(accessKey, accessCount);
-
-  currentCode = inputCode;
-  document.getElementById("login-section").style.display = "none";
-  document.getElementById("goal-section").style.display = "block";
-  loadGoals();
+    const codeInput = document.getElementById('secretCode').value;
+    const vaultSection = document.querySelector('.vault-section');
+    const loginSection = document.querySelector('.login-section');
+    
+    if (codeInput === secretCode) {
+        loginSection.style.display = "none";
+        vaultSection.style.display = "block";
+        loadGoals();
+    } else {
+        alert("Invalid secret code! Try again.");
+    }
 }
 
-function addGoal() {
-  const goalText = document.getElementById("goalInput").value.trim();
-  if (!goalText) return;
-
-  const goalsKey = `goals_${currentCode}`;
-  const goals = JSON.parse(localStorage.getItem(goalsKey)) || [];
-
-  goals.push(goalText);
-  localStorage.setItem(goalsKey, JSON.stringify(goals));
-  document.getElementById("goalInput").value = "";
-  loadGoals();
+function saveGoal() {
+    const goalInput = document.getElementById('goalInput').value;
+    
+    if (goalInput.trim() !== "") {
+        storedGoals.push(goalInput);
+        localStorage.setItem('goals', JSON.stringify(storedGoals));
+        loadGoals();
+        document.getElementById('goalInput').value = ''; // Clear input
+    } else {
+        alert("Please enter a goal!");
+    }
 }
 
 function loadGoals() {
-  const goalsKey = `goals_${currentCode}`;
-  const goals = JSON.parse(localStorage.getItem(goalsKey)) || [];
-
-  const goalList = document.getElementById("goalList");
-  goalList.innerHTML = "";
-  goals.forEach((goal) => {
-    const li = document.createElement("li");
-    li.textContent = goal;
-    goalList.appendChild(li);
-  });
+    const goalsList = document.getElementById('goalsList');
+    goalsList.innerHTML = '';  // Clear the list before reloading
+    
+    const stored = JSON.parse(localStorage.getItem('goals'));
+    if (stored && stored.length > 0) {
+        storedGoals = stored;
+        storedGoals.forEach(goal => {
+            const goalDiv = document.createElement('div');
+            goalDiv.textContent = goal;
+            goalsList.appendChild(goalDiv);
+        });
+    }
 }
