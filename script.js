@@ -1,44 +1,29 @@
-let secretCode = "1234";  // Default secret code
-let storedGoals = [];
+document.getElementById("goalForm").addEventListener("submit", function (e) {
+    e.preventDefault();
 
-function login() {
-    const codeInput = document.getElementById('secretCode').value;
-    const vaultSection = document.querySelector('.vault-section');
-    const loginSection = document.querySelector('.login-section');
-    
-    if (codeInput === secretCode) {
-        loginSection.style.display = "none";
-        vaultSection.style.display = "block";
-        loadGoals();
-    } else {
-        alert("Invalid secret code! Try again.");
-    }
-}
+    // Get the goal title and description
+    const title = document.getElementById("goalTitle").value;
+    const description = document.getElementById("goalDescription").value;
 
-function saveGoal() {
-    const goalInput = document.getElementById('goalInput').value;
-    
-    if (goalInput.trim() !== "") {
-        storedGoals.push(goalInput);
-        localStorage.setItem('goals', JSON.stringify(storedGoals));
-        loadGoals();
-        document.getElementById('goalInput').value = ''; // Clear input
-    } else {
-        alert("Please enter a goal!");
-    }
-}
+    // Add new goal to the Goals section
+    const goalCard = document.createElement("div");
+    goalCard.classList.add("col-md-4");
+    goalCard.innerHTML = `
+        <div class="card mb-4">
+            <img src="https://via.placeholder.com/150" class="card-img-top" alt="Goal">
+            <div class="card-body">
+                <h5 class="card-title">${title}</h5>
+                <p class="card-text">${description}</p>
+                <button class="btn btn-primary">Edit</button>
+                <button class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    `;
+    document.getElementById("goalCards").appendChild(goalCard);
 
-function loadGoals() {
-    const goalsList = document.getElementById('goalsList');
-    goalsList.innerHTML = '';  // Clear the list before reloading
-    
-    const stored = JSON.parse(localStorage.getItem('goals'));
-    if (stored && stored.length > 0) {
-        storedGoals = stored;
-        storedGoals.forEach(goal => {
-            const goalDiv = document.createElement('div');
-            goalDiv.textContent = goal;
-            goalsList.appendChild(goalDiv);
-        });
-    }
-}
+    // Reset the form
+    document.getElementById("goalForm").reset();
+    // Close the modal
+    const modal = bootstrap.Modal.getInstance(document.getElementById('addGoalModal'));
+    modal.hide();
+});
