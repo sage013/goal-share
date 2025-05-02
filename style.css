@@ -1,38 +1,118 @@
+/* Reset some defaults */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background: #f0f4f8;
-  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #8e2de2, #4a00e0);
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: white;
+  overflow: hidden;
 }
+
 .container {
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
-  max-width: 400px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 3rem;
+  border-radius: 15px;
+  max-width: 500px;
   width: 100%;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
 }
+
+.container h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #fff;
+}
+
 input {
-  padding: 0.5rem;
   width: 100%;
+  padding: 1rem;
   margin-top: 1rem;
-  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.3s ease-in-out;
 }
+
+input:focus {
+  border-color: #4a00e0;
+  box-shadow: 0 0 10px rgba(74, 0, 224, 0.5);
+}
+
 button {
   width: 100%;
-  padding: 0.5rem;
-  background-color: #0077cc;
+  padding: 1rem;
+  margin-top: 1rem;
+  background-color: #4a00e0;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
+  font-size: 1.1rem;
   cursor: pointer;
+  transition: 0.3s ease-in-out;
 }
+
 button:hover {
-  background-color: #005fa3;
+  background-color: #8e2de2;
 }
+
 ul {
-  list-style-type: disc;
+  list-style-type: none;
+  margin-top: 1.5rem;
+  padding-left: 0;
+}
+
+ul li {
+  font-size: 1rem;
+  background-color: #fff;
+  padding: 0.7rem;
+  margin-bottom: 0.8rem;
+  border-radius: 8px;
+  color: #333;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+ul li:last-child {
+  margin-bottom: 0;
+}
+
+#loginMessage {
+  font-size: 1rem;
+  color: #ff4d4d;
   margin-top: 1rem;
-  padding-left: 1.2rem;
+  display: none;
+}
+
+#goal-section {
+  display: none;
+}
+
+#login-section {
+  display: block;
+}
+
+/* Animation for login section */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#login-section {
+  animation: fadeIn 1s ease-out;
 }
