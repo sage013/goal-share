@@ -1,29 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Secret Goal Share</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goal Sharing Vault</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Goal Sharing Vault</h1>
+    <div class="container">
+        <header>
+            <h1>Goal Sharing Vault</h1>
+            <p>Securely share your lifetime goals with someone special!</p>
+        </header>
+        
+        <section class="login-section">
+            <h2>Login to your Vault</h2>
+            <div class="input-group">
+                <label for="secretCode">Enter your secret code:</label>
+                <input type="text" id="secretCode" placeholder="Enter secret code" required>
+                <button onclick="login()">Login</button>
+            </div>
+        </section>
 
-    <div id="login-section">
-      <input type="text" id="codeInput" placeholder="Enter your secret code" />
-      <button onclick="login()">Enter</button>
-      <p id="loginMessage"></p>
+        <section class="vault-section" style="display: none;">
+            <h2>Your Vault</h2>
+            <div class="goal-input">
+                <textarea id="goalInput" placeholder="Add your lifetime goal..." rows="4"></textarea>
+                <button onclick="saveGoal()">Save Goal</button>
+            </div>
+            <div class="goals-list" id="goalsList"></div>
+        </section>
     </div>
-
-    <div id="goal-section">
-      <h2>Your Shared Goals</h2>
-      <input type="text" id="goalInput" placeholder="Enter a goal or value" />
-      <button onclick="addGoal()">Add Goal</button>
-      <ul id="goalList"></ul>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
+    
+    <script src="script.js"></script>
 </body>
 </html>
